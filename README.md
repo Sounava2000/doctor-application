@@ -42,7 +42,20 @@ This project includes both **frontend React apps** (user and admin) and an **Exp
 
 ```text
 doctor-application/
-├── admin/                # React Admin Panel
-├── doctor-frontend/      # React Frontend Website
-└── backend-doctor-app/   # Express Backend + MongoDB Models & APIs
+├── admin/                 # React Admin Panel
+├── doctor-frontend/       # React Frontend Website
+├── backend-doctor-app/    # Express Backend + MongoDB Models & APIs
+└── screenshots/           # Screenshots for UI / Documentation
+
+## 📸 UI Preview
+
+### Home Page
+![Home Page](screenshots/User_Frontend.PNG)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/Admin_Login.PNG)
+
+### Doctor Dashboard
+![Admin Dashboard](screenshots/Doctor_Login.PNG)
+
 
