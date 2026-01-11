@@ -37,6 +37,14 @@ This project includes both **frontend React apps** (user and admin) and an **Exp
 - **Others:** Git, GitHub
 
 ---
+### Home Page
+![Home Page](screenshots/User_Frontend.PNG)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/Admin_Login.PNG)
+
+### Doctor Dashboard
+![Doctor Dashboard](screenshots/Doctor_Login.PNG)
 
 ## 📂 Project Structure
 
@@ -47,15 +55,6 @@ doctor-application/
 ├── backend-doctor-app/    # Express Backend + MongoDB Models & APIs
 └── screenshots/           # Screenshots for UI / Documentation
 
-## 📸 UI Preview
 
-### Home Page
-![Home Page](screenshots/User_Frontend.PNG)
-
-### Admin Dashboard
-![Admin Dashboard](screenshots/Admin_Login.PNG)
-
-### Doctor Dashboard
-![Admin Dashboard](screenshots/Doctor_Login.PNG)
 
 
