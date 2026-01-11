@@ -12,20 +12,13 @@ export const Footer = () => {
           </p>
         </div>
  
-        <div>
-          <h2 className="text-xl font-semibold text-white mb-4">Quick Links</h2>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white transition">Home</a></li>
-            <li><a href="#" className="hover:text-white transition">Doctors</a></li>
-            <li><a href="#" className="hover:text-white transition">Specialities</a></li>
-            <li><a href="#" className="hover:text-white transition">Contact</a></li>
-          </ul>
-        </div>
+      
+      
  
         <div>
           <h2 className="text-xl font-semibold text-white mb-4">Contact</h2>
           <p className="text-sm">📍 123 Health Street, Kolkata</p>
-          <p className="text-sm">📞 +91 98765 43210</p>
+          <p className="text-sm">📞 +**********</p>
           <p className="text-sm">✉️ support@healthcare.com</p>
         </div>
       </div>

@@ -10,7 +10,8 @@ export const SpecialityMenu = () => {
         Find by Speciality
       </h1>
       <p className="text-gray-500 mb-8">
-        Lorem ipsum dolor sit amet consectetur.
+          Browse doctors by speciality and connect with trusted healthcare professionals
+  for expert medical consultation.
       </p>
  
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">

@@ -135,11 +135,8 @@ export const MyAppointment = () => {
             </div>
 
             <div className="flex flex-col md:flex-row gap-3 mt-6 md:mt-0">
-              {!item.cancelled && (
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition duration-200">
-                  Pay Online
-                </button>
-              )}
+            
+            
 
               {!item.cancelled && (
                 <button

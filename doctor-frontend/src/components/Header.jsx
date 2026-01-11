@@ -17,18 +17,14 @@ export const Header = () => {
             className="w-15 h-10 rounded-full"
           />
           <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
-            expedita.
+              Easily book appointments with experienced and trusted doctors.
+  Get quality healthcare support, personalized consultations,
+  and manage your appointments anytime, anywhere.
           </p>
         </div>
 
-        <a
-          href="#specality"
-          className="inline-flex items-center gap-2 bg-white text-blue-600 font-semibold px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition"
-        >
-          Book Appointment
-          <img src={assets.arrow_icon} alt="arrow" className="w-4 h-4" />
-        </a>
+       
+       
       </div>
  
       <div>
