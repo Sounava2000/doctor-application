@@ -16,7 +16,7 @@ console.log(backendUrl)
     event.preventDefault();
 
     try {
-      const endpoint =
+ const endpoint =
   state === "Admin"
     ? `${backendUrl.replace(/\/$/, "")}/api/admin/login`
     : `${backendUrl.replace(/\/$/, "")}/api/doctor/login`;

@@ -18,25 +18,27 @@ const PORT = process.env.PORT || 5000;
 
 const upload = multer ({dest: 'uploads/'});
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://doctor-application-omega.vercel.app'
+  'http://localhost:5173',                   // local dev
+  'https://doctor-application-omega.vercel.app', // Vercel frontend
 ];
 
+// Dynamic CORS
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // Postman or curl
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (!origin) return callback(null, true); // allow Postman/curl
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization','token','atoken']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'token', 'atoken']
 }));
 
-app.options('*', cors()); // Preflight handler
+// Preflight handler
+app.options('*', cors());
 
 
 
