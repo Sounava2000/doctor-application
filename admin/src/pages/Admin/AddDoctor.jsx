@@ -130,6 +130,7 @@ export const AddDoctor = () => {
             <input
               type="email"
               value={email}
+               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -143,6 +144,7 @@ export const AddDoctor = () => {
             <input
               type="password"
               value={password}
+               autoComplete="new-password"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
