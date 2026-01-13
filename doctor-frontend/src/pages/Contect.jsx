@@ -7,6 +7,7 @@ export const Contect = () => {
     email: "",
     message: "",
   });
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -29,7 +30,7 @@ export const Contect = () => {
 
     try {
       const res = await fetch(
-        "http://localhost:8000/api/user/send-message",
+        `${backendUrl.replace(/\/$/, "")}/api/user/send-message`,
         {
           method: "POST",
           headers: {

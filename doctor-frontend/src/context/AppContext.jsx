@@ -16,7 +16,7 @@ export const AppContextProvider = ({ children }) => {
   const [userData, setuserData] = useState(false);
   const getDoctorsData = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/doctor/list`);
+      const res = await fetch(`${backendUrl.replace(/\/$/, "")}/api/doctor/list`);
       const data = await res.json();
       setDoctors(data.message);
     } catch (error) {
@@ -27,7 +27,7 @@ export const AppContextProvider = ({ children }) => {
   const loadUserProfileData = async () => {
     try {
       const response = await fetch(
-        `${backendUrl}/api/user/get-profile`,
+        `${backendUrl.replace(/\/$/, "")}/api/user/get-profile`,
         {
           method: "GET",
           headers: {

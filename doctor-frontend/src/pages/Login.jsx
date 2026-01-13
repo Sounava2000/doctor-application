@@ -5,61 +5,60 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const { token, setToken } = useContext(AppContext);
+
   const [state, setState] = useState("Sign Up");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const navigate = useNavigate()
   const [password, setPassword] = useState("");
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    console.log({ name, email, password });
-    try {
-      if (state === "Sign Up") {
-        const res = await fetch("http://localhost:8000/api/user/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          setToken(data.token);
-          setEmail("");
-          setName("");
-          setPassword("");
-          toast.success(data.message);
-        } else {
-          toast.error(data.message);
-        }
-      } else {
-        const res = await fetch("http://localhost:8000/api/user/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          setToken(data.token);
 
-          toast.success(data.message);
-        } else {
-          toast.error(data.message);
-        }
+  const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const url =
+        state === "Sign Up"
+          ? `${backendUrl.replace(/\/$/, "")}/api/user/register`
+          : `${backendUrl.replace(/\/$/, "")}/api/user/login`;
+
+      const body =
+        state === "Sign Up"
+          ? { name, email, password }
+          : { email, password };
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
+
+        setEmail("");
+        setName("");
+        setPassword("");
+
+        toast.success(data.message);
+        navigate("/");
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Something went wrong");
     }
   };
-useEffect(() => {
- if (token) {
-  navigate("/")
- }
-}, [token,navigate])
+
+  useEffect(() => {
+    if (token) navigate("/");
+  }, [token, navigate]);
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -70,6 +69,7 @@ useEffect(() => {
         <h2 className="text-3xl font-bold text-center text-blue-600 mb-2">
           {state === "Sign Up" ? "Create Account" : "Login"}
         </h2>
+
         <p className="text-gray-500 text-center mb-8">
           Please {state === "Sign Up" ? "sign up" : "log in"} to book an
           appointment.
@@ -82,6 +82,7 @@ useEffect(() => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
               placeholder="Enter your full name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
@@ -94,6 +95,8 @@ useEffect(() => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
             placeholder="Enter your email"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
@@ -105,6 +108,10 @@ useEffect(() => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete={
+              state === "Sign Up" ? "new-password" : "current-password"
+            }
             placeholder="Enter your password"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
@@ -112,7 +119,7 @@ useEffect(() => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
         >
           {state === "Sign Up" ? "Create Account" : "Login"}
         </button>
@@ -120,7 +127,7 @@ useEffect(() => {
         <p className="text-center text-sm text-gray-600 mt-6">
           {state === "Sign Up" ? (
             <>
-              Already have an account?
+              Already have an account?{" "}
               <span
                 onClick={() => setState("Login")}
                 className="text-blue-600 font-semibold cursor-pointer"
@@ -130,7 +137,7 @@ useEffect(() => {
             </>
           ) : (
             <>
-              Don’t have an account?
+              Don’t have an account?{" "}
               <span
                 onClick={() => setState("Sign Up")}
                 className="text-blue-600 font-semibold cursor-pointer"

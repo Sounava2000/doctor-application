@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'https://doctor-application-omega.vercel.app',
+  "https://doctor-application-user.vercel.app",
 ];
 
  

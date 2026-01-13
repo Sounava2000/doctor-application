@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 export const Appointment = () => {
   const { docId } = useParams();
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const {
     getDoctorsData,
@@ -80,7 +81,7 @@ export const Appointment = () => {
       const slotDate = day + "_" + month + "_" + year;
       console.log(slotDate);
       const res = await fetch(
-        "http://localhost:8000/api/user/book-appointment",
+       `${backendUrl.replace(/\/$/, "")}/api/user/book-appointment`,
         {
           method: "POST",
           headers: {
