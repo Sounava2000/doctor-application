@@ -78,6 +78,7 @@ console.log(backendUrl)
             type="email"
             required
             value={email}
+              autoComplete="username"
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -89,6 +90,7 @@ console.log(backendUrl)
             type="password"
             required
             value={password}
+            autoComplete="current-password" 
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
