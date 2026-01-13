@@ -21,11 +21,11 @@ const allowedOrigins = [
   'https://doctor-application-omega.vercel.app',
 ];
 
-// ✅ CORS (MUST be first)
+ 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // Postman / Render
+      if (!origin) return callback(null, true);  
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-// Routes
+ 
 app.use('/api/admin', adminRouter);
 app.use('/api/doctor', doctorRouter);
 app.use('/api/user', userRouter);

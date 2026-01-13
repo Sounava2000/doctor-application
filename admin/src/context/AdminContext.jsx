@@ -12,11 +12,11 @@ export const AdminContextProvider = ({ children }) => {
   const [dashData, setdashData] = useState(false);
  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
   
- 
+
  
   const getAllDoctors = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/admin/all-doctors`, {
+      const res = await fetch(`  ${backendUrl.replace(/\/$/, "")}/api/admin/all-doctors`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${aToken}`,
@@ -36,7 +36,7 @@ export const AdminContextProvider = ({ children }) => {
   const changeAvailability = async (docId) => {
     try {
       const res = await fetch(
-        `${backendUrl}/api/admin/change-availability`,
+        ` ${backendUrl.replace(/\/$/, "")}/api/admin/change-availability`,
         {
           method: "POST",
           headers: {
@@ -62,7 +62,7 @@ export const AdminContextProvider = ({ children }) => {
 
   const getAllAppointments = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/admin/appointments`, {
+      const res = await fetch(` ${backendUrl.replace(/\/$/, "")}/api/admin/appointments`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const AdminContextProvider = ({ children }) => {
   const cancelAppointment = async (appointmentId) => {
     try {
       const res = await fetch(
-        `${backendUrl}/api/admin/cancel-appointment`,
+        ` ${backendUrl.replace(/\/$/, "")}/api/admin/cancel-appointment`,
         {
           method: "POST",
           headers: {
@@ -103,7 +103,7 @@ export const AdminContextProvider = ({ children }) => {
   };
   const getDashData = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/admin/dashboard`, {
+      const res = await fetch(` ${backendUrl.replace(/\/$/, "")}/api/admin/dashboard`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

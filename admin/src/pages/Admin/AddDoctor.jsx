@@ -38,7 +38,7 @@ export const AddDoctor = () => {
 
       if (file) formData.append("file", file);
 
-      const res = await fetch(`${backendUrl}/api/admin/add-doctor`, {
+      const res = await fetch(`${backendUrl.replace(/\/$/, "")}/api/admin/add-doctor`, {
         method: "POST",
         body: formData,
         headers: {

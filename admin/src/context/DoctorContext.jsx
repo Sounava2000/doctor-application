@@ -1,148 +1,167 @@
-import {createContext, useState} from 'react';
-import {toast} from 'react-toastify';
-export const DoctorContext = createContext ();
-export const DoctorContextProvider = props => {
-  const [dToken, setDtoken] = useState (
-    localStorage.getItem ('dToken') ? localStorage.getItem ('dToken') : ''
+import { createContext, useState } from "react";
+import { toast } from "react-toastify";
+
+export const DoctorContext = createContext();
+
+export const DoctorContextProvider = ({ children }) => {
+  const [dToken, setDtoken] = useState(
+    localStorage.getItem("dToken") || ""
   );
-  const [appointments, setAppointments] = useState ([]);
-  const [dashData, setdashData] = useState ({});
-  const [profileData, setprofileData] = useState (false);
+
+  const [appointments, setAppointments] = useState([]);
+  const [dashData, setdashData] = useState({});
+  const [profileData, setprofileData] = useState(false);
+
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+  // 🔹 Get Appointments
   const getAppointments = async () => {
     try {
-      const res = await fetch (
-        'http://localhost:8000/api/doctor/appointments',
+      const res = await fetch(
+        `${backendUrl.replace(/\/$/, "")}/api/doctor/appointments`,
         {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${dToken}`,
           },
+          credentials: "include",
         }
       );
-      const data = await res.json ();
+
+      const data = await res.json();
       if (data.success) {
-        setAppointments (data.appointments);
-        console.log (data.appointments);
+        setAppointments(data.appointments);
       } else {
-        toast.error (data.message);
+        toast.error(data.message);
       }
     } catch (error) {
-      console.error (error);
-      toast.error (error.message);
+      toast.error(error.message);
     }
   };
-  const completeAppointment = async appointmentId => {
+
+  // 🔹 Complete Appointment
+  const completeAppointment = async (appointmentId) => {
     try {
-      const res = await fetch (
-        'http://localhost:8000/api/doctor/complete-appointment',
+      const res = await fetch(
+        `${backendUrl.replace(/\/$/, "")}/api/doctor/complete-appointment`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${dToken}`,
           },
-          body: JSON.stringify ({appointmentId}),
+          credentials: "include",
+          body: JSON.stringify({ appointmentId }),
         }
       );
-      const data = await res.json ();
+
+      const data = await res.json();
       if (data.success) {
-        toast.success (data.message);
-        getAppointments ();
+        toast.success(data.message);
+        getAppointments();
       } else {
-        toast.error (data.message);
+        toast.error(data.message);
       }
     } catch (error) {
-      console.log (error);
-      toast.error (error.message);
+      toast.error(error.message);
     }
   };
-  const CancelAppointment = async appointmentId => {
+
+  // 🔹 Cancel Appointment
+  const cancelAppointment = async (appointmentId) => {
     try {
-      const res = await fetch (
-        'http://localhost:8000/api/doctor/cancel-appointment',
+      const res = await fetch(
+        `${backendUrl.replace(/\/$/, "")}/api/doctor/cancel-appointment`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${dToken}`,
           },
-          body: JSON.stringify ({appointmentId}),
+          credentials: "include",
+          body: JSON.stringify({ appointmentId }),
         }
       );
-      const data = await res.json ();
+
+      const data = await res.json();
       if (data.success) {
-        toast.success (data.message);
-        getAppointments ();
+        toast.success(data.message);
+        getAppointments();
       } else {
-        toast.error (data.message);
+        toast.error(data.message);
       }
     } catch (error) {
-      console.log (error);
-      toast.error (error.message);
+      toast.error(error.message);
     }
   };
+
+  // 🔹 Dashboard Data
   const getDashData = async () => {
     try {
-      const res = await fetch ('http://localhost:8000/api/doctor/dashboard', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${dToken}`,
-        },
-      });
+      const res = await fetch(
+        `${backendUrl.replace(/\/$/, "")}/api/doctor/dashboard`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${dToken}`,
+          },
+          credentials: "include",
+        }
+      );
 
-      const data = await res.json ();
+      const data = await res.json();
       if (data.success) {
-        setdashData (data.dashData);
-        toast.success (data.dashData);
+        setdashData(data.dashData);
       } else {
-        toast.error ('Failed to load dashboard data');
+        toast.error("Failed to load dashboard data");
       }
     } catch (error) {
-      console.error (error);
-      toast.error (error.message);
+      toast.error(error.message);
     }
   };
+
+  // 🔹 Profile Data
   const getProfileData = async () => {
     try {
-      const res = await fetch ('http://localhost:8000/api/doctor/profile', {
-        method: 'GET',
-        headers: {  
-          Authorization: `Bearer ${dToken}`,
-        },
-      });
-      const data = await res.json ();
+      const res = await fetch(
+        `${backendUrl.replace(/\/$/, "")}/api/doctor/profile`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${dToken}`,
+          },
+          credentials: "include",
+        }
+      );
+
+      const data = await res.json();
       if (data.success) {
-        setprofileData (data.profileData);
-        toast.success (data.message);
+        setprofileData(data.profileData);
       } else {
-        toast.success (data.message);
+        toast.error(data.message);
       }
     } catch (error) {
-      console.error (error);
-      toast.error (error.message);
+      toast.error(error.message);
     }
   };
+
   return (
     <DoctorContext.Provider
       value={{
         dToken,
         setDtoken,
         appointments,
-        setAppointments,
-        completeAppointment,
-        CancelAppointment,
         getAppointments,
+        completeAppointment,
+        cancelAppointment,
         dashData,
-        setdashData,
         getDashData,
         profileData,
-        setprofileData,
         getProfileData,
       }}
     >
-      {props.children}
+      {children}
     </DoctorContext.Provider>
   );
 };
