@@ -17,9 +17,10 @@ console.log(backendUrl)
 
     try {
       const endpoint =
-        state === "Admin"
-          ? `${backendUrl}/api/admin/login`
-          : `${backendUrl}/api/doctor/login`;
+  state === "Admin"
+    ? `${backendUrl.replace(/\/$/, "")}/api/admin/login`
+    : `${backendUrl.replace(/\/$/, "")}/api/doctor/login`;
+
 
       const response = await fetch(endpoint, {
         method: "POST",
